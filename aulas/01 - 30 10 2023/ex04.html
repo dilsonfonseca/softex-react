@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function Car(){
+            return <h1>Hi, I'am a Car</h1>
+        }
+
+        function Garage(){
+            return(
+                <>
+                <h1>Who lives in my Garage?</h1>
+                <Car />
+                </>
+            );
+        }
+
+    const root = ReactDOM.createrRoot(document.getElementById('root'));
+    root.render(<Garage />);
+    </script>
+</body>
+</html>
