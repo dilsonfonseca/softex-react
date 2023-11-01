@@ -10,6 +10,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <div id="element"></div>
     <script type="text/babel">
         
         function App(props){
@@ -18,6 +19,7 @@
         }
         
         ReactDOM.render(<App text = "I love JSX!" />, document.getElementById('root'))
+        ReactDOM.render(<App text = "Jose" />, document.getElementById('element'))
     </script>
 </body>
 </html>
