@@ -18,7 +18,7 @@
                   this.state = {
                       name: "Dilson",
                       job: "Developer",
-                      born: 1997
+                      born: 1996
                   }
               }
           
@@ -27,13 +27,19 @@
               this.setState({born: 2000})
           }
 
+          changeYearBack = () => {
+              this.setState({born: 1997})
+          }
+
+          
           render(){
               return (
                   <div>
                   <h1>My name is {this.state.name}</h1>
                   <p>I work as a {this.state.job}</p>
                   <p>I was born in {this.state.born}</p>
-                  <button type = "button" onClick = {this.changeYear}>Change Year</button>
+                  <button type = "button" onClick = {this.changeYear}>Change year</button>
+                  <button type = "button" onClick = {this.changeYearBack}>Change year back</button>
                   </div>
               );
           }
