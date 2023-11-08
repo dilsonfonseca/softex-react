@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Hello React!</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        class Header extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    favoriteColor: "red"
+                };
+            }
+
+            static getDerivedStateFromProps(props, state) {
+                alert('getDerivedStateFromProps')
+                return {
+                    favoriteColor: props.favcol
+                };
+            }
+
+            componentWillMount()
+            {
+                alert('componentWillMount')
+            }
+
+            render() {
+                alert('render')
+                return (
+                    <h1>My favorite color is {this.state.favoriteColor}</h1>
+                );
+            }
+
+            componentDidMount()
+            {
+                alert('componentDidMount')
+            }
+        }
+
+        ReactDOM.render(<Header favcol="Amarelo" />, document.getElementById('root'))
+
+    </script>
+</body>
+
+</html>
