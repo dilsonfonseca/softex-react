@@ -13,48 +13,73 @@
 
 <body>
     <div id="root"></div>
-
     <script type="text/babel">
 
         class Header extends React.Component {
             constructor(props) {
                 super(props);
                 this.state = {
-                    favoriteColor: "Amarelo"
+                    favoriteColor: "Vermelho"
                 };
             }
 
-            /*static getDerivedStateFromProps(props, state) {
+            /*
+            static getDerivedStateFromProps(props, state) {
+                alert('getDerivedStateFromProps')
                 return {
                     favoriteColor: props.favcol
                 };
-            }*/
+            }
+            */
 
-          changeColor = () => {
-              this.setState({favoriteColor: "Azul"})
-          }
+            changeColor = () => {
+                alert('changeColor')
+                this.setState({ favoriteColor: "Azul" });
+            }
 
+            
+            componentWillMount()
+            {
+                alert('componentWillMount')
+            }
+            
             render() {
+                alert('render')
                 return (
                     <div>
                         <h1>My favorite color is {this.state.favoriteColor}</h1>
-                        <button type = "button" onClick = {this.changeColor}>Mudar Cor</button>
+                        <button
+                            type="button"
+                            onClick={this.changeColor}
+                        >Mudar cor</button>
                     </div>
-                );
+                        );
             }
-            
-            componentWillUpdate(){
+
+            componentDidMount()
+            {
+                alert('componentDidMount')
+            }
+
+           /* shouldComponentUpdate()
+            {
+                alert('shouldComponentUpdate')
+                return false;
+            } */
+
+            componentWillUpdate()
+            {
                 alert('componentWillUpdate')
             }
 
-            componentDidUpdate(){
+            componentDidUpdate()
+            {
                 alert('componentDidUpdate')
             }
 
-
         }
 
-        ReactDOM.render(<Header favcol="Amarelo" />, document.getElementById('root'))
+                        ReactDOM.render(<Header favcol="Amarelo" />, document.getElementById('root'))
 
     </script>
 </body>
