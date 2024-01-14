@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API JSONPlaceholder</title>
+</head>
+<body>
+
+    <h1>Exemplo de POST e GET em uma API</h1>
+
+    <form id="formulario">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" required>
+
+        <label for="username">Nome de Usuário:</label>
+        <input type="text" id="username" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" required>
+
+        <button type="button" onclick="adicionarUsuario()">Adicionar Usuário</button>
+    </form>
+
+    <button onclick="recuperarUsuario()">Recuperar Usuário</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        const apiUrl = 'https://jsonplaceholder.typicode.com/users';
+
+        function adicionarUsuario() {
+            const name = document.getElementById('name').value;
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            if (!name || !username || !email) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const novoUsuario = {
+                name,
+                username,
+                email
+            };
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(novoUsuario),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Novo usuário adicionado:', data);
+                exibirResultado('Novo usuário adicionado: ' + JSON.stringify(data));
+            })
+            .catch(error => {
+                console.error('Erro ao adicionar usuário:', error);
+                exibirResultado('Erro ao adicionar usuário: ' + error.message);
+            });
+        }
+
+        function recuperarUsuario() {
+            fetch(apiUrl + '/1')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Usuário recuperado:', data);
+                    exibirResultado('Usuário recuperado: ' + JSON.stringify(data));
+                })
+                .catch(error => {
+                    console.error('Erro ao recuperar usuário:', error);
+                    exibirResultado('Erro ao recuperar usuário: ' + error.message);
+                });
+        }
+
+        function exibirResultado(mensagem) {
+            document.getElementById('resultado').innerHTML = '<p>' + mensagem + '</p>';
+        }
+    </script>
+
+</body>
+</html>

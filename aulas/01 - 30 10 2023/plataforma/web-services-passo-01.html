@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API USDBRL</title>
+</head>
+<body>
+
+    <h1>Consulta de Dólar para Real (USD to BRL)</h1>
+
+    <label for="valorDolar">Digite o valor em Dólares:</label>
+    <input type="text" id="valorDolar">
+    <button onclick="consultarAPI()">Converter</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function consultarAPI() {
+            var valorDolarString = document.getElementById('valorDolar').value.replace(',', '.');
+
+            var valorDolar = parseFloat(valorDolarString);
+
+            if (isNaN(valorDolar) || valorDolar <= 0) {
+                exibirErro('Por favor, insira um valor válido em dólares.');
+                return;
+            }
+
+
+            var url = 'https://api.exchangerate-api.com/v4/latest/USD';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.rates && data.rates.BRL !== undefined) {
+    
+                        exibirResultado(data.rates, valorDolar);
+                    } else {
+                        throw new Error('Erro na requisição da API: Dados não encontrados.');
+                    }
+                })
+                .catch(error => {
+                    exibirErro(error.message);
+                });
+        }
+
+        function exibirResultado(rates, valorDolar) {
+            var valorReal = valorDolar * rates.BRL;
+            var resultadoHTML = '<p>Valor em Dólares: $' + valorDolar.toFixed(2) + '</p>';
+            resultadoHTML += '<p>Valor em Reais: R$' + valorReal.toFixed(2) + '</p>';
+
+            document.getElementById('resultado').innerHTML = resultadoHTML;
+        }
+
+        function exibirErro(mensagem) {
+            document.getElementById('resultado').innerHTML = '<p style="color: red;">Erro: ' + mensagem + '</p>';
+        }
+    </script>
+
+</body>
+</html>
